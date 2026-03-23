@@ -7,42 +7,33 @@ import type { Plugin } from "@opencode-ai/plugin"
 
 // ─── Configuration ───────────────────────────────────────────────────────────
 
-const SKOLL_PORT = parseInt(Bun.env.SKOLL_PORT ?? process.env.SKOLL_PORT ?? "7439")
-const SKOLL_URL = `http://127.0.0.1:${SKOLL_PORT}`
 const SKOLL_BIN = process.env.SKOLL_BIN ?? "skoll"
 
 const SKOLL_TOOLS = new Set([
+  "rsaw_scan",
+  "rsaw_read_item",
+  "rsaw_create_item",
+  "rsaw_update_item",
+  "rsaw_get_template",
   "rule_list",
-  "rule_check",
-  "skill_load",
-  "skill_search",
-  "agent_activate",
-  "agent_list",
-  "agent_context",
-  "agent_handoff",
-  "workflow_start",
-  "workflow_step",
-  "workflow_status",
-  "workflow_complete",
 ])
 
 // ─── Orchestration Instructions ──────────────────────────────────────────────
 
 const ORCHESTRATION_INSTRUCTIONS = `## Skoll Protocol
-You have access to Skoll, a RSAW (Rules, Skills, Agents, Workflows) Orchestration Layer.
+You have access to Skoll, an AI Orchestration Layer for the RSAW (Rules, Skills, Agents, Workflows) framework.
 
 ### ORCHESTRATION TOOLS:
-#### Rules (MANDATORY at start)
-Call: rule_list() to understand global project constraints.
+- **rsaw_scan()**: MANDATORY at session start to see all project components.
+- **rsaw_read_item(path)**: Use to analyze existing workflows, agents or skills.
+- **rsaw_create_item(type, name, content)**: Use to generate new RSAW components dynamically.
+- **rsaw_update_item(path, content)**: Use to link agents to workflows or update rules.
+- **rsaw_get_template(type)**: Get the base structure for a component.
 
-#### Agents (MANDATORY when switching context)
-Call: agent_activate(name="agent_name") to load identity, scope and skills for a specific role (e.g. "backend", "frontend").
-
-#### Skills (MANDATORY before performing technical tasks)
-Call: skill_load(name="skill_name") to load specific project "how-to" knowledge (e.g. "git-workflow").
-
-#### Workflows (MANDATORY for complex multi-step processes)
-Call: workflow_start(name="workflow_name") to initiate a guided process.
+### RULES:
+1. Always scan the project with \`rsaw_scan\` before designing new components.
+2. Follow the templates obtained via \`rsaw_get_template\`.
+3. Use \`rsaw_update_item\` to maintain the linkages between agents and workflows.
 `
 
 export const Skoll: Plugin = async (ctx) => {

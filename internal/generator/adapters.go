@@ -30,8 +30,10 @@ func InjectOpenCodeMCP() error {
 	}
 
 	mcpBlock["skoll"] = map[string]interface{}{
+		"type":    "command",
 		"command": utils.ResolveBinaryPath(),
 		"args":    []string{"mcp"},
+		"enabled": true,
 	}
 
 	config["mcpServers"] = mcpBlock
