@@ -22,7 +22,7 @@ type Server struct {
 }
 
 func NewServer(logger *log.Logger) *Server {
-	srv := server.NewMCPServer("skoll", "0.1.0")
+	srv := server.NewMCPServer("skoll", "1.4.0")
 
 	s := &Server{
 		logger: logger,

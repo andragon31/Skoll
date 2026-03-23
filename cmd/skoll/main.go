@@ -14,7 +14,7 @@ import (
 var openCodeFS embed.FS
 
 var (
-	version = "0.1.0"
+	version = "1.4.0"
 )
 
 func main() {
