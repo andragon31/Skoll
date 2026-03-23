@@ -46,6 +46,8 @@ consistency, clear roles, and reproducible processes to your AI-assisted workflo
 	rootCmd.AddCommand(setupCmd)
 	rootCmd.AddCommand(mcpCmd)
 	rootCmd.AddCommand(tuiCmd)
+	rootCmd.AddCommand(analyzeCmd)
+	rootCmd.AddCommand(createCmd)
 
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)
