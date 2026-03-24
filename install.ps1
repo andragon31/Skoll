@@ -6,7 +6,7 @@ $URL = "https://github.com/$REPO/releases/latest/download/$BIN"
 $INSTALL_DIR = "$env:LOCALAPPDATA\Programs\skoll"
 $EXE_PATH = "$INSTALL_DIR\skoll.exe"
 
-$VERSION = "v1.4.0"
+$VERSION = "v4.0.0"
 
 Clear-Host
 Write-Host "======================================" -ForegroundColor Cyan
